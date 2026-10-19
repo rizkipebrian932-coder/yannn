@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY PORTOFOLIO</title>
+    <style>
+        /* === CSS STYLING === */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-color: #121212; 
+            --main-color: #e60000; 
+            --secondary-color: #ff4d4d; 
+            --text-color: #ffffff;
+            --text-muted: #b3b3b3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas untuk Efek Glitter / Partikel */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1; /* Melayang halus di atas latar belakang */
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 2px solid var(--main-color);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--main-color);
+        }
+
+        .nav-links a {
+            font-size: 16px;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 35px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--main-color);
+        }
+
+        /* Seksi Utama */
+        section {
+            position: relative;
+            z-index: 2; /* Agar konten tetap di atas partikel */
+            min-height: 100vh;
+            padding: 100px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .section-heading {
+            font-size: 40px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-heading span {
+            color: var(--main-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: var(--main-color);
+            text-shadow: 0 0 15px var(--main-color);
+        }
+
+        .hero h3 {
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--main-color);
+            color: var(--text-color);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.4s;
+            box-shadow: 0 0 15px var(--main-color);
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background: transparent;
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+            box-shadow: none;
+        }
+
+        /* Foto Profil */
+        .hero-img img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--main-color);
+            box-shadow: 0 0 30px var(--main-color);
+            transition: 0.4s;
+        }
+
+        .hero-img img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 45px var(--secondary-color);
+        }
+
+        /* Keahlian Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill-box {
+            background: rgba(30, 30, 30, 0.9);
+            backdrop-filter: blur(5px);
+            padding: 20px 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--main-color);
+            width: 300px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .skill-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(230, 0, 0, 0.3);
+            border-color: var(--secondary-color);
+        }
+
+        .skill-box h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .skill-box p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Kontak Section */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .contact-box {
+            background: rgba(30, 30, 30, 0.9);
+            backdrop-filter: blur(5px);
+            padding: 25px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            border-bottom: 4px solid var(--main-color);
+            transition: 0.3s;
+        }
+
+        .contact-box:hover {
+            background: var(--main-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(230, 0, 0, 0.4);
+        }
+
+        .contact-box h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .contact-box p, .contact-box a {
+            font-size: 15px;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .contact-box:hover p, .contact-box:hover a {
+            color: var(--text-color);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 2;
+            background: #181818;
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid #333;
+        }
+
+        footer span {
+            color: var(--main-color);
+        }
+
+        /* Animasi */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 150px;
+            }
+            .hero-img img {
+                width: 250px;
+                height: 250px;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Efek Glitter / Partikel -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navbar -->
+    <header>
+        <a href="#" class="logo">Porto<span>Folio.</span></a>
+        <nav class="nav-links">
+            <a href="#beranda">Beranda</a>
+            <a href="#keahlian">Keahlian</a>
+            <a href="#kontak">Kontak</a>
+        </nav>
+    </header>
+
+    <!-- Beranda -->
+    <section id="beranda" class="hero">
+        <div class="hero-content fade-in">
+            <h1>Halo, Saya <span>RIZKI PEBRIAN</span></h1>
+            <h3>Mahasiswa Sistem Informasi | Admin Support & Virtual Assistant</h3>
+            <p>
+                Saya memiliki antusiasme besar di bidang teknologi, administrasi, dan kepemimpinan. Terbiasa memadukan kreativitas dalam desain visual dan kemampuan analitis untuk mengelola sistem serta proyek dengan efisien.
+            </p>
+            <a href="#kontak" class="btn">Hubungi Saya</a>
+        </div>
+        
+        <div class="hero-img fade-in">
+            <img src="pfp.jpg" alt="Foto Profil Saya">
+        </div>
+    </section>
+
+    <!-- Keahlian -->
+    <section id="keahlian">
+        <h2 class="section-heading">Keahlian <span>Saya</span></h2>
+        <div class="skills-container">
+            <div class="skill-box">
+                <h4>Software Produktivitas</h4>
+                <p>mampu dalam membuat Microsoft Word, Excel, dan PowerPoint untuk dokumentasi dan analisis data.</p>
+            </div>
+            <div class="skill-box">
+                <h4>Desain Visual</h4>
+                <p>Mampu menggunakan Canva dan aplikasi editing untuk merancang konten media sosial dan CV ATS-friendly.</p>
+            </div>
+            <div class="skill-box">
+                <h4>Virtual Assistance</h4>
+                <p>Keterampilan dalam dukungan administratif, penjadwalan, hingga penyusunan laporan berbasis data.</p>
+            </div>
+            <div class="skill-box">
+                <h4>Kepemimpinan</h4>
+                <p>Berpengalaman dalam organisasi dan perencanaan acara, pembuatan proposal, hingga eksekusi kegiatan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak">
+        <h2 class="section-heading">Hubungi <span>Saya</span></h2>
+        <div class="contact-container fade-in">
+            <div class="contact-box">
+                <h4>Email</h4>
+                <a href="rizkipebrian932@gmail.com">rizkipebrian932@gmail.com</a>
+            </div>
+            <div class="contact-box">
+                <h4>WhatsApp</h4>
+                <a href="https://wa.me/6285177856423" target="_blank">+62 851-7785-6423</a>
+            </div>
+            <div class="contact-box">
+                <h4>Instagram</h4>
+                <a href="https://instagram.com/usernamekamu" target="_blank">@usernamekamu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <span>RIZKI PEBRIAN</span>. Dibuat dengan dedikasi dan kreativitas.</p>
+    </footer>
+
+    <!-- === JAVASCRIPT EFEK GLITTER / PARTIKEL === -->
+    <script>
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        const numberOfParticles = 70; // Jumlah partikel glitter
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1; // Ukuran partikel bervariasi
+                this.speedX = Math.random() * 1 - 0.5; // Gerakan menyamping
+                this.speedY = Math.random() * -1.2 - 0.3; // Gerakan melayang ke atas
+                // Warna acak antara merah menyala dan putih berkilau
+                this.color = Math.random() > 0.3 ? 'rgba(230, 0, 0, ' + Math.random() + ')' : 'rgba(255, 255, 255, ' + Math.random() + ')';
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Jika partikel naik sampai atas, kembalikan ke bawah
+                if (this.y < 0) {
+                    this.y = canvas.height + 10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#ff0000'; // Efek glowing merah
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Menyesuaikan ukuran canvas saat window di-resize
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+    </script>
+</body>
+</html>
