@@ -95,6 +95,29 @@
         .badge-item span { font-size: 13px; font-weight: 600; }
         .badge-item:hover { border-color: var(--main); background: rgba(230,0,0,0.15); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(230,0,0,0.3); }
 
+        /* Stylings Khusus Pengalaman */
+        .experience-wrapper { display: flex; flex-direction: column; gap: 25px; width: 100%; max-width: 900px; }
+        .experience-card {
+            background: var(--card); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px;
+            border-left: 5px solid var(--main); border-bottom: 2px solid var(--blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); transition: 0.3s;
+            display: flex; gap: 20px; align-items: flex-start;
+        }
+        .experience-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(230,0,0,0.3); }
+        .experience-icon {
+            background: rgba(230, 0, 0, 0.15); color: var(--main); width: 50px; height: 50px;
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; flex-shrink: 0; border: 1px solid var(--main);
+        }
+        .experience-info { flex: 1; }
+        .experience-info h3 { font-size: 20px; color: var(--text); margin-bottom: 5px; }
+        .experience-info .company-tag { font-size: 14px; color: var(--main); font-weight: 600; margin-bottom: 8px; display: block; }
+        .experience-info .time-tag {
+            font-size: 12px; color: var(--blue); font-weight: 600; margin-bottom: 12px; display: inline-block;
+            background: rgba(0, 85, 255, 0.15); padding: 4px 12px; border-radius: 15px; border: 1px solid var(--blue);
+        }
+        .experience-info p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
         .contact-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }
         .contact-box { background: var(--card); backdrop-filter: blur(5px); padding: 25px; border-radius: 10px; width: 250px; text-align: center; border-bottom: 4px solid var(--main); transition: 0.3s; }
         .contact-box:hover { background: var(--main); transform: translateY(-5px); box-shadow: 0 5px 20px rgba(230,0,0,0.5); }
@@ -107,7 +130,12 @@
         @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 900px) { .skills-wrapper { flex-direction: column; } .badges-grid { grid-template-columns: repeat(2, 1fr); } .hanging-spidey { display: none; } }
-        @media (max-width: 768px) { .hero { flex-direction: column-reverse; text-align: center; padding-top: 150px; } .hero-img img { width: 250px; height: 250px; } .nav-links { display: none; } }
+        @media (max-width: 768px) { 
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 150px; } 
+            .hero-img img { width: 250px; height: 250px; } 
+            .nav-links { display: none; }
+            .experience-card { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -115,7 +143,6 @@
 
     <!-- Pemutar Musik HTML & Tombol Melayang -->
     <audio id="bg-music" loop>
-        <!-- Ubah 'lagu.mp3' sesuai nama file lagu kamu (atau link lagu MP3) -->
         <source src="oh yeah.mp3" type="audio/mpeg">
     </audio>
     <button id="music-btn" class="music-player-btn" title="Putar Musik">
@@ -133,6 +160,7 @@
         <nav class="nav-links">
             <a href="#beranda">Beranda</a>
             <a href="#keahlian">Keahlian</a>
+            <a href="#pengalaman">Pengalaman</a>
             <a href="#kontak">Kontak</a>
         </nav>
     </header>
@@ -185,6 +213,42 @@
                     <div class="badge-item"><i class="fa-solid fa-file-powerpoint"></i><span>MS PowerPoint</span></div>
                     <div class="badge-item"><i class="fa-solid fa-pen-nib"></i><span>Canva</span></div>
                     <div class="badge-item"><i class="fa-solid fa-code"></i><span>VS Code</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Pengalaman Kerja & Organisasi -->
+    <section id="pengalaman">
+        <h2 class="section-heading"><i class="fa-solid fa-spider"></i> Pengalaman <span>Saya</span></h2>
+        <div class="experience-wrapper fade-in">
+            <div class="experience-card">
+                <div class="experience-icon"><i class="fa-solid fa-camera"></i></div>
+                <div class="experience-info">
+                    <h3>Ketua Divisi Dokumentasi & Media</h3>
+                    <span class="company-tag"><i class="fa-solid fa-users"></i> Ekstrakurikuler Rohis SMA</span>
+                    <span class="time-tag"><i class="fa-regular fa-calendar"></i> Masa SMA</span>
+                    <p>Memimpin tim dokumentasi dalam mengabadikan seluruh rangkaian kegiatan keagamaan dan acara besar sekolah, mengelola arsip foto dan video, serta merancang publikasi visual untuk media informasi organisasi.</p>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon"><i class="fa-solid fa-tree"></i></div>
+                <div class="experience-info">
+                    <h3>Petugas Sortir & Quality Control Kayu</h3>
+                    <span class="company-tag"><i class="fa-solid fa-industry"></i> Pabrik Kayu</span>
+                    <span class="time-tag"><i class="fa-regular fa-clock"></i> 1 Minggu</span>
+                    <p>Bertanggung jawab atas pemilahan awal material kayu basah dan kering dengan presisi tinggi, memastikan kesesuaian standar mutu bahan baku untuk mendukung efisiensi alur produksi selanjutnya.</p>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-icon"><i class="fa-solid fa-store"></i></div>
+                <div class="experience-info">
+                    <h3>Penjual Pernak-Pernik</h3>
+                    <span class="company-tag"><i class="fa-solid fa-school"></i> Event Sekolahan</span>
+                    <span class="time-tag"><i class="fa-regular fa-calendar"></i> Kegiatan Event</span>
+                    <p>Memimpin operasional booth penjualan pernak-pernik pada event sekolah, mengoptimalkan penataan display produk untuk meningkatkan daya tarik visual, serta mengelola alur transaksi dan komunikasi pelanggan secara ramah dan efektif.</p>
                 </div>
             </div>
         </div>
