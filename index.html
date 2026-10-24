@@ -51,7 +51,7 @@
         header { position: fixed; width: 100%; top: 0; left: 0; padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 10, 12, 0.88); backdrop-filter: blur(10px); z-index: 100; border-bottom: 2px solid var(--main); }
         .logo { font-size: 28px; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .logo i { color: var(--main); font-size: 24px; animation: spiderPulse 2s infinite; }
-        .logo span, .section-heading span, .hero h1 span, footer span, .skill-info .percent { color: var(--main); }
+        .logo span, .section-heading span, .hero h1 span, footer span { color: var(--main); }
         .nav-links a { font-size: 16px; color: var(--text); text-decoration: none; margin-left: 35px; font-weight: 600; transition: 0.3s; }
         .nav-links a:hover { color: var(--main); text-shadow: 0 0 8px var(--main); }
 
@@ -75,27 +75,55 @@
         .spider-badge { position: absolute; bottom: 10px; right: 10px; background: var(--main); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; border: 2px solid #fff; animation: spiderPulse 2s infinite; }
         @keyframes spiderPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px var(--main); } 50% { transform: scale(1.12); box-shadow: 0 0 25px var(--blue); } }
 
-        .skills-wrapper { display: flex; width: 100%; max-width: 1100px; gap: 30px; }
-        .skills-col { flex: 1; background: var(--card); backdrop-filter: blur(10px); padding: 35px 30px; border-radius: 20px; border-top: 4px solid var(--main); border-bottom: 2px solid var(--blue); box-shadow: 0 10px 30px rgba(0,0,0,0.6); transition: 0.3s; }
-        .skills-col:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(230,0,0,0.3); }
-        .skills-col h3 { font-size: 22px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; }
+        /* --- DESAIN BARU KEAHLIAN & TOOLS (Glassmorphism Bento Matrix) --- */
+        .skills-wrapper { display: grid; grid-template-columns: 1.2fr 0.8fr; width: 100%; max-width: 1100px; gap: 30px; }
+        .skills-col { background: var(--card); backdrop-filter: blur(12px); padding: 35px 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0,0,0,0.6); transition: 0.3s; position: relative; overflow: hidden; }
+        .skills-col::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--main), var(--blue)); }
+        .skills-col:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(230,0,0,0.25); border-color: rgba(230,0,0,0.3); }
+        .skills-col h3 { font-size: 22px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; }
         .skills-col h3 i { color: var(--main); font-size: 24px; }
+
+        /* Core Capabilities - Glass Cards */
+        .skills-grid-container { display: flex; flex-direction: column; gap: 16px; }
+        .skill-card {
+            background: rgba(18, 18, 24, 0.7); border: 1px solid rgba(255,255,255,0.05); padding: 16px 20px; border-radius: 14px; transition: 0.3s; position: relative;
+        }
+        .skill-card:hover {
+            background: rgba(25, 25, 35, 0.95); border-color: var(--main); transform: translateX(5px); box-shadow: 0 5px 15px rgba(230,0,0,0.2);
+        }
+        .skill-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .skill-title-group { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; color: #fff; }
+        .skill-title-group i { color: var(--blue); font-size: 16px; }
+        .skill-tag-pill {
+            font-size: 11px; font-weight: 700; background: rgba(230, 0, 0, 0.15); color: var(--main); border: 1px solid var(--main); padding: 2px 10px; border-radius: 20px; letter-spacing: 0.5px;
+        }
+        .skill-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
         
-        .skill-bar-item { margin-bottom: 20px; }
-        .skill-info { display: flex; justify-content: space-between; margin-bottom: 4px; font-weight: 600; font-size: 15px; }
-        .skill-desc { font-size: 13px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
-        .progress-line { width: 100%; height: 8px; background: #222; border-radius: 10px; position: relative; overflow: hidden; }
-        .progress-line span { height: 100%; background: linear-gradient(90deg, var(--main), var(--blue)); position: absolute; border-radius: 10px; box-shadow: 0 0 10px var(--main); }
+        /* Segmented Progress Indicators */
+        .segmented-bar { display: flex; gap: 6px; width: 100%; height: 6px; }
+        .segmented-bar .segment { flex: 1; background: rgba(255, 255, 255, 0.1); border-radius: 4px; transition: 0.3s; }
+        .segmented-bar .segment.active { background: linear-gradient(90deg, var(--main), var(--blue)); box-shadow: 0 0 8px var(--main); }
 
-        .badges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .badge-item { background: #1c1c22; padding: 20px 10px; border-radius: 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid #333; transition: 0.3s; }
-        .badge-item i { font-size: 32px; }
-        .fa-file-word { color: #2b579a; } .fa-file-excel { color: #217346; } .fa-file-powerpoint { color: #d24726; }
-        .fa-pen-nib { color: #00c4cc; } .fa-code { color: #007acc; }
-        .badge-item span { font-size: 13px; font-weight: 600; }
-        .badge-item:hover { border-color: var(--main); background: rgba(230,0,0,0.15); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(230,0,0,0.3); }
+        /* Tools & Tech Matrix Chips */
+        .tools-intro { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+        .tools-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
+        .tool-chip {
+            background: rgba(22, 22, 28, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 16px; border-radius: 12px;
+            display: flex; align-items: center; gap: 10px; transition: 0.3s; flex: 1 1 calc(50% - 12px); min-width: 130px;
+        }
+        .tool-chip i { font-size: 22px; transition: 0.3s; }
+        .tool-chip span { font-size: 13px; font-weight: 600; color: var(--text); }
+        .tool-chip:hover {
+            background: rgba(230, 0, 0, 0.12); border-color: var(--main); transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(230,0,0,0.3);
+        }
+        .tool-chip:hover i { transform: scale(1.2); }
 
-        /* Stylings Khusus Pengalaman */
+        /* Original Software Icon Colors */
+        .icon-word { color: #2b579a; } .icon-excel { color: #217346; } .icon-ppt { color: #d24726; }
+        .icon-canva { color: #00c4cc; } .icon-vscode { color: #007acc; } .icon-python { color: #ffd43b; }
+
+        /* Pengalaman Kerja & Organisasi */
         .experience-wrapper { display: flex; flex-direction: column; gap: 25px; width: 100%; max-width: 900px; }
         .experience-card {
             background: var(--card); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px;
@@ -129,12 +157,13 @@
         .fade-in { opacity: 0; transform: translateY(30px); animation: fadeIn 1s forwards; }
         @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
-        @media (max-width: 900px) { .skills-wrapper { flex-direction: column; } .badges-grid { grid-template-columns: repeat(2, 1fr); } .hanging-spidey { display: none; } }
+        @media (max-width: 900px) { .skills-wrapper { grid-template-columns: 1fr; } .hanging-spidey { display: none; } }
         @media (max-width: 768px) { 
             .hero { flex-direction: column-reverse; text-align: center; padding-top: 150px; } 
             .hero-img img { width: 250px; height: 250px; } 
             .nav-links { display: none; }
             .experience-card { flex-direction: column; }
+            .tool-chip { flex: 1 1 100%; }
         }
     </style>
 </head>
@@ -178,41 +207,71 @@
         </div>
     </section>
 
+    <!-- Bagian Keahlian & Tools Matrix -->
     <section id="keahlian">
         <h2 class="section-heading"><i class="fa-solid fa-spider"></i> Keahlian <span>Saya</span></h2>
         <div class="skills-wrapper fade-in">
+            <!-- Kolom Core Capabilities -->
             <div class="skills-col">
-                <h3><i class="fa-solid fa-laptop-code"></i> Core & Professional Skills</h3>
-                <div class="skill-bar-item">
-                    <div class="skill-info"><span>Software Produktivitas</span><span class="percent">80%</span></div>
-                    <p class="skill-desc">Penguasaan dasar pada Microsoft Word, Excel, dan PowerPoint untuk dokumentasi dan analisis data.</p>
-                    <div class="progress-line"><span style="width:80%;"></span></div>
-                </div>
-                <div class="skill-bar-item">
-                    <div class="skill-info"><span>Desain Visual</span><span class="percent">70%</span></div>
-                    <p class="skill-desc">Mampu menggunakan Canva dan aplikasi editing untuk merancang konten media sosial dan CV ATS-friendly.</p>
-                    <div class="progress-line"><span style="width:70%;"></span></div>
-                </div>
-                <div class="skill-bar-item">
-                    <div class="skill-info"><span>Virtual Assistance</span><span class="percent">70%</span></div>
-                    <p class="skill-desc">Memiliki minat dan ketertarikan dalam dukungan administratif, penjadwalan, hingga penyusunan laporan berbasis data.</p>
-                    <div class="progress-line"><span style="width:70%;"></span></div>
-                </div>
-                <div class="skill-bar-item">
-                    <div class="skill-info"><span>Kepemimpinan</span><span class="percent">80%</span></div>
-                    <p class="skill-desc">Berpengalaman dalam organisasi dan perencanaan acara, pembuatan proposal, hingga eksekusi kegiatan.</p>
-                    <div class="progress-line"><span style="width:80%;"></span></div>
+                <h3><i class="fa-solid fa-bolt"></i> Core Capabilities</h3>
+                <div class="skills-grid-container">
+                    <div class="skill-card">
+                        <div class="skill-card-head">
+                            <div class="skill-title-group"><i class="fa-solid fa-file-invoice"></i> Software Produktivitas</div>
+                            <span class="skill-tag-pill">ADVANCED (80%)</span>
+                        </div>
+                        <p>Penguasaan dasar hingga mahir pada Microsoft Word, Excel, dan PowerPoint untuk dokumentasi serta analisis data terstruktur.</p>
+                        <div class="segmented-bar">
+                            <div class="segment active"></div><div class="segment active"></div><div class="segment active"></div><div class="segment active"></div><div class="segment"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-head">
+                            <div class="skill-title-group"><i class="fa-solid fa-palette"></i> Desain Visual & UI</div>
+                            <span class="skill-tag-pill">CREATIVE (70%)</span>
+                        </div>
+                        <p>Mampu menggunakan Canva & tool editing untuk merancang konten media sosial interaktif, aset presentasi, dan CV ATS-friendly.</p>
+                        <div class="segmented-bar">
+                            <div class="segment active"></div><div class="segment active"></div><div class="segment active"></div><div class="segment"></div><div class="segment"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-head">
+                            <div class="skill-title-group"><i class="fa-solid fa-headset"></i> Virtual Assistance</div>
+                            <span class="skill-tag-pill">SUPPORT (70%)</span>
+                        </div>
+                        <p>Dukungan administratif profesional, manajemen jadwal, organisasi file digital, dan penyusunan laporan berbasis data.</p>
+                        <div class="segmented-bar">
+                            <div class="segment active"></div><div class="segment active"></div><div class="segment active"></div><div class="segment"></div><div class="segment"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-head">
+                            <div class="skill-title-group"><i class="fa-solid fa-users-gear"></i> Kepemimpinan & Organisasi</div>
+                            <span class="skill-tag-pill">LEADERSHIP (80%)</span>
+                        </div>
+                        <p>Berpengalaman memimpin tim, merencanakan eksekusi event, penyusunan proposal, hingga manajemen koordinasi divisi.</p>
+                        <div class="segmented-bar">
+                            <div class="segment active"></div><div class="segment active"></div><div class="segment active"></div><div class="segment active"></div><div class="segment"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Kolom Tech Stack & Tools -->
             <div class="skills-col">
-                <h3><i class="fa-solid fa-medal"></i> Tools & Badges</h3>
-                <div class="badges-grid">
-                    <div class="badge-item"><i class="fa-solid fa-file-word"></i><span>MS Word</span></div>
-                    <div class="badge-item"><i class="fa-solid fa-file-excel"></i><span>MS Excel</span></div>
-                    <div class="badge-item"><i class="fa-solid fa-file-powerpoint"></i><span>MS PowerPoint</span></div>
-                    <div class="badge-item"><i class="fa-solid fa-pen-nib"></i><span>Canva</span></div>
-                    <div class="badge-item"><i class="fa-solid fa-code"></i><span>VS Code</span></div>
+                <h3><i class="fa-solid fa-screwdrivers-all"></i> Tech Stack & Tools</h3>
+                <p class="tools-intro">Perangkat lunak dan platform yang aktif saya gunakan dalam operasional harian, analisis, dan karya visual:</p>
+                <div class="tools-cloud">
+                    <div class="tool-chip"><i class="fa-solid fa-file-word icon-word"></i><span>MS Word</span></div>
+                    <div class="tool-chip"><i class="fa-solid fa-file-excel icon-excel"></i><span>MS Excel</span></div>
+                    <div class="tool-chip"><i class="fa-solid fa-file-powerpoint icon-ppt"></i><span>MS PowerPoint</span></div>
+                    <div class="tool-chip"><i class="fa-solid fa-pen-nib icon-canva"></i><span>Canva</span></div>
+                    <div class="tool-chip"><i class="fa-solid fa-code icon-vscode"></i><span>VS Code</span></div>
+                    <div class="tool-chip"><i class="fa-brands fa-python icon-python"></i><span>Python</span></div>
                 </div>
             </div>
         </div>
@@ -320,7 +379,7 @@
                     let dy = particlesArray[a].y - particlesArray[b].y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 85) {
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 - dist/800})`;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 - dist/850})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
